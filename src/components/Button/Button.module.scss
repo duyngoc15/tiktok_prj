@@ -1,0 +1,77 @@
+.wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 100px;
+    padding: 9px 16px;
+    border-radius: 4px;
+    font-size: 1.6rem;
+    font-weight: 700;
+    cursor: pointer;
+    background-color: white;
+    border: 1px solid transparent;
+    user-select: none;
+    // +: Đây là bộ chọn liền kề (adjacent sibling). Nó áp dụng các kiểu cho phần tử .wrapper, nhưng chỉ khi phần tử này xuất hiện ngay sau một phần tử khác (liền kề trong HTML).
+    + .wrapper {
+        margin-left: 9px;
+    }
+    // css này có nghĩa là ưu tiên class disabled trong class wrapper hơn các css khác
+    &.disabled {
+        pointer-events: none;
+        opacity: 0.5;
+    }
+}
+
+/*
+css này có nghĩa là: .icon + .title : có nghĩa là khi icon nằm bên trái title ( đúng theo thứ tự cách viết) thì sẽ margin left cho phần tử phía sau (.title),
+.title + .icon : có nghĩa là khi icon nằm bên phải title ( đúng theo thứ tự cách viết) thì sẽ margin left cho phần tử phía sau (.icon)
+ */
+.icon + .title,
+.title + .icon {
+    margin-left: 8px;
+}
+
+// button type
+.rounded {
+    border-radius: 999px;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 6%);
+    border-color: rgba(22, 24, 35, 0.12);
+    &:hover {
+        border-color: rgba(22, 24, 35, 0.2);
+        background-color: rgba(22, 24, 35, 0.03);
+    }
+}
+
+.primary {
+    color: white;
+    background-color: var(--primary);
+    border-color: var(--primary);
+    &:hover {
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.06)), #fe2c55;
+        border-color: var(--primary);
+    }
+}
+.outline {
+    color: var(--primary);
+    border-color: currentColor;
+    &:hover {
+        border-color: currentColor;
+        background-color: rgba(254, 44, 85, 0.06);
+    }
+}
+.text {
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+// disabled
+// button sizes
+.small {
+    min-width: 88px;
+    padding: 4px 16px;
+}
+.large {
+    min-width: 148px;
+    padding: 14px 16px;
+}
