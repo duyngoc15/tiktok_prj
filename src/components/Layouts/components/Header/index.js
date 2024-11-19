@@ -25,11 +25,39 @@ function Header() {
         setTimeout(() => {
             setSearchResult([]);
         }, 0);
-    });
+    }, []);
     const MENU_ITEMS = [
         {
             icon: <FontAwesomeIcon icon={faEarthAsia} />,
             title: 'English',
+            children: {
+                title: 'Language',
+                data: [
+                    {
+                        type: 'language',
+                        code: 'en',
+                        title: 'English',
+                        children: {
+                            title: 'Language',
+                            data: [
+                                {
+                                    code: 'en',
+                                    title: 'Arabic',
+                                },
+                                {
+                                    code: 'vn',
+                                    title: 'Thai',
+                                },
+                            ],
+                        },
+                    },
+                    {
+                        type: 'language',
+                        code: 'vn',
+                        title: 'Tiếng Việt',
+                    },
+                ],
+            },
         },
         {
             icon: <FontAwesomeIcon icon={faCircleQuestion} />,
@@ -41,6 +69,18 @@ function Header() {
             title: 'Keyboard shortcuts',
         },
     ];
+    const handleOnChange = (menuItem) => {
+        switch (menuItem.type) {
+            case 'language': {
+                console.log(menuItem);
+                break;
+            }
+            default: {
+                console.log('ngoai le type');
+                // defaul handle
+            }
+        }
+    };
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
@@ -84,7 +124,7 @@ function Header() {
                     {/* <Button rounded className={cx('custom-login')}>
                         Log in
                     </Button> */}
-                    <Menu items={MENU_ITEMS}>
+                    <Menu items={MENU_ITEMS} onChange={handleOnChange}>
                         <button className={cx('more-btn')}>
                             <FontAwesomeIcon icon={faEllipsisVertical} />
                         </button>

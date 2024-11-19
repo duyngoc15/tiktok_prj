@@ -16,6 +16,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 0px var(--default-layout-horizontal-spacer);
 }
 .search,
 .search-result {
@@ -94,4 +95,5 @@
     margin-left: 28px;
     padding: 4px 8px;
     background-color: transparent;
+    cursor: pointer;
 }
