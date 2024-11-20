@@ -9,15 +9,18 @@
     padding-bottom: 8px;
 }
 .menu-item {
-    &:hover {
-        background-color: rgba(22, 24, 35, 0.03);
-    }
     width: 100%;
     justify-content: flex-start;
     border-radius: 0;
     border: none;
     padding: 13px 16px;
     line-height: 1.8rem;
+    &.separate {
+        border-top: 1px solid rgba(22, 24, 35, 0.12);
+    }
+    &:hover {
+        background-color: rgba(22, 24, 35, 0.03);
+    }
 }
 // header
 .header {
