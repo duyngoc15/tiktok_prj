@@ -12,13 +12,27 @@ function Search() {
     const [searchValue, setSearchValue] = useState('');
     const [searchResult, setSearchResult] = useState([]);
     const [showResult, setShowResult] = useState(true);
+    const [showLoading, setShowLoading] = useState(false);
     const inputRef = useRef();
 
     useEffect(() => {
-        setTimeout(() => {
-            setSearchResult([1, 2, 3]);
-        }, 0);
-    }, []);
+        if (!searchValue) {
+            setSearchResult([]);
+            return;
+        }
+        setShowLoading(true);
+        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(searchValue)}&type=less`)
+            .then((res) => {
+                return res.json();
+            })
+            .then((res) => {
+                setSearchResult(res.data);
+                setShowLoading(false);
+            })
+            .catch(() => {
+                setShowLoading(false);
+            });
+    }, [searchValue]);
     const handleClickOutside = () => {
         setShowResult(false);
     };
@@ -30,11 +44,9 @@ function Search() {
                 <div className={cx('search-result')} tabIndex="-1" {...attrs}>
                     <PopperWrapper>
                         <h4 className={cx('search-title')}>Account</h4>
-                        <AccountItem />
-                        <AccountItem />
-                        <AccountItem />
-                        <AccountItem />
-                        <AccountItem />
+                        {searchResult.map((data) => {
+                            return <AccountItem key={data.id} data={data} />;
+                        })}
                     </PopperWrapper>
                 </div>
             )}
@@ -53,7 +65,7 @@ function Search() {
                         setShowResult(true);
                     }}
                 />
-                {!!searchValue && (
+                {!!searchValue && !showLoading && (
                     <button
                         className={cx('clear')}
                         onClick={() => {
@@ -65,7 +77,7 @@ function Search() {
                         <FontAwesomeIcon icon={faCircleXmark} />
                     </button>
                 )}
-                {/* <FontAwesomeIcon className={cx('loading')} icon={faSpinner} /> */}
+                {showLoading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
                 <button className={cx('search-btn')}>
                     <SearchIcon />
                 </button>
