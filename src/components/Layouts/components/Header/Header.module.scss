@@ -18,6 +18,9 @@
     justify-content: space-between;
     padding: 0px var(--default-layout-horizontal-spacer);
 }
+.logo-link {
+    display: flex;
+}
 .custom-login {
     color: red;
 }
@@ -52,7 +55,7 @@
     font-size: 1.4rem;
     font-weight: 600;
     color: var(--white);
-    font-family: 'ProximaNova', sans-serif;
+    font-family: var(--font-family);
     background-color: var(--primary);
 }
 .user-avatar {

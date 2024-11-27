@@ -6,6 +6,7 @@
     --black: #000;
     --text-color: #161823;
     --default-layout-horizontal-spacer: 24;
+    --font-family: 'TikTokFont', sans-serif;
 }
 
 html {
@@ -16,7 +17,7 @@ html {
     box-sizing: border-box;
 }
 body {
-    font-family: 'TikTokFont', sans-serif;
+    font-family: var(--font-family);
     font-weight: 700;
     font-style: normal;
     font-size: 1.6rem;

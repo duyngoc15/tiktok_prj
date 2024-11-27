@@ -7,7 +7,7 @@ import Header from './Header';
 import { useState } from 'react';
 const cx = classNames.bind(style);
 const defaultFn = () => {};
-function Menu({ children, items = [], onChange = defaultFn }) {
+function Menu({ children, items = [], hideOnClick = 'false', onChange = defaultFn }) {
     const [history, setHistory] = useState([{ data: items }]);
     const current = history[history.length - 1];
     const renderItem = () => {
@@ -52,6 +52,7 @@ function Menu({ children, items = [], onChange = defaultFn }) {
             onHide={() => {
                 setHistory((prev) => prev.slice(0, 1));
             }}
+            hideOnClick={hideOnClick}
         >
             {children}
         </Tippy>
