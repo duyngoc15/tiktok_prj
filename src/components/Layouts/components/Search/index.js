@@ -1,38 +1,37 @@
 import classNames from 'classnames/bind';
 import styles from './Search.module.scss';
+import HeadlessTippy from '@tippyjs/react/headless';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { SearchIcon } from '~/components/Icon';
 import { useEffect, useRef, useState } from 'react';
-import HeadlessTippy from '@tippyjs/react/headless';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import AccountItem from '~/components/AccountItem';
+import { useDebounce } from '~/hooks';
+//request api from axios instance
+// import * as request from '~/utils/request';
+import * as searchService from '~/apiService/searchService';
 const cx = classNames.bind(styles);
 function Search() {
     const [searchValue, setSearchValue] = useState('');
     const [searchResult, setSearchResult] = useState([]);
     const [showResult, setShowResult] = useState(true);
     const [showLoading, setShowLoading] = useState(false);
+    const debounced = useDebounce(searchValue, 500);
     const inputRef = useRef();
-
     useEffect(() => {
-        if (!searchValue) {
+        if (!debounced) {
             setSearchResult([]);
             return;
         }
-        setShowLoading(true);
-        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(searchValue)}&type=less`)
-            .then((res) => {
-                return res.json();
-            })
-            .then((res) => {
-                setSearchResult(res.data);
-                setShowLoading(false);
-            })
-            .catch(() => {
-                setShowLoading(false);
-            });
-    }, [searchValue]);
+        const fetchApi = async () => {
+            setShowLoading(true);
+            const res = await searchService.search(debounced);
+            setSearchResult(res);
+            setShowLoading(false);
+        };
+        fetchApi();
+    }, [debounced]);
     const handleClickOutside = () => {
         setShowResult(false);
     };
