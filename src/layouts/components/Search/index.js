@@ -10,7 +10,7 @@ import AccountItem from '~/components/AccountItem';
 import { useDebounce } from '~/hooks';
 //request api from axios instance
 // import * as request from '~/utils/request';
-import * as searchService from '~/apiService/searchService';
+import * as searchService from '~/services/searchService';
 const cx = classNames.bind(styles);
 function Search() {
     const [searchValue, setSearchValue] = useState('');

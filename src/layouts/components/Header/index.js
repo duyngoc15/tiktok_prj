@@ -21,7 +21,7 @@ import Menu from '~/components/Popper/Menu';
 import { InboxIcon, MessageIcon, UploadIcon } from '~/components/Icon';
 import Image from '~/components/Image';
 import Search from '../Search';
-import Routes from '~/configs/Routes';
+import configs from '~/configs';
 const cx = classNames.bind(styles);
 function Header() {
     const MENU_ITEMS = [
@@ -108,7 +108,7 @@ function Header() {
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
                 <div className={cx('logo')}>
-                    <Link to={Routes.home} className={cx('logo-link')}>
+                    <Link to={configs.Routes.home} className={cx('logo-link')}>
                         <img src={images.logo} alt="tiktok" />
                     </Link>
                 </div>
